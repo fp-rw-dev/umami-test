@@ -3,7 +3,7 @@ require('dotenv').config();
 const path = require('path');
 const pkg = require('./package.json');
 
-const TRACKER_SCRIPT = '/script.js';
+const TRACKER_SCRIPT = '/tracker.js';
 
 const basePath = process.env.BASE_PATH;
 const collectApiEndpoint = process.env.COLLECT_API_ENDPOINT;
@@ -68,12 +68,10 @@ const headers = [
 
 const rewrites = [];
 
-if (trackerScriptURL) {
-  rewrites.push({
-    source: TRACKER_SCRIPT,
-    destination: trackerScriptURL,
-  });
-}
+rewrites.push({
+  source: '/script.js',
+  destination: trackerScriptURL || TRACKER_SCRIPT,
+});
 
 if (collectApiEndpoint) {
   rewrites.push({
